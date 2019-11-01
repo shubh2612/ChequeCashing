@@ -5,11 +5,13 @@ namespace ChequeCashing
 {
     public partial class App : Application
     {
+        public static NavigationPage navigationPage { get; set; }
         public App()
         {
             InitializeComponent();
-
-            MainPage = new VerifyPage();
+            navigationPage = new NavigationPage(new Dashboard());
+            navigationPage.BarBackgroundColor = Color.FromHex("#f54e5e");
+            MainPage = navigationPage;
         }
 
         protected override void OnStart()

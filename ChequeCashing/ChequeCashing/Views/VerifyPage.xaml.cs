@@ -1,4 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using ChequeCashing.Model;
+using ChequeCashing.ViewModel;
+using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +13,13 @@ namespace ChequeCashing.Views
         public VerifyPage()
         {
             InitializeComponent();
-            NavigationPage.SetHasNavigationBar(this, true);
+            BindingContext = new VerifyViewModel();
+        }
+
+        private void CustomDatePicker_DateSelected(object sender, DateChangedEventArgs e)
+        {
+            var date = ((DatePicker)sender).Date;
+            ((VerifyViewModel)this.BindingContext).SelectedDate = date.ToString("MM/dd/yyyy");
         }
     }
 }

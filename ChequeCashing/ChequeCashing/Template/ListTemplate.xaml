@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DataTemplate xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="ChequeCashing.Template.ListTemplate">
+    <ViewCell>
+        <Grid BackgroundColor="{DynamicResource Gray-100}"
+              ColumnSpacing="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackLayout Grid.Column="1"
+                         Padding="0,5"
+                         Margin="0,10"
+                         Spacing="0">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Cheque Number:"
+                           FontSize="20"/>
+                    <Label Text="{Binding ChequeNumber}"  
+                       FontSize="20"
+                       IsVisible="{Binding ChequeNumber, Converter={StaticResource TextToVisibilityConverter}}"/>
+                </StackLayout>
+                
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Remaining Amount:"/>
+                    <Label Text="{Binding RemainingAmount}" 
+                       IsVisible="{Binding RemainingAmount, Converter={StaticResource TextToVisibilityConverter}}"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Date:"/>
+                    <Label Text="{Binding Date}"                       
+                       IsVisible="{Binding Date, Converter={StaticResource TextToVisibilityConverter}}"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal"
+                                 Grid.Column="1">
+                    <Label Text="Status:"/>
+                    <Label Text="{Binding Status}"                       
+                       IsVisible="{Binding Status, Converter={StaticResource TextToVisibilityConverter}}"/>
+                </StackLayout>
+            </StackLayout>
+
+            <BoxView Grid.Row="0"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="3"
+                     HeightRequest="1" 
+                     Color="Gray"
+                     VerticalOptions="End"/>
+        </Grid>
+    </ViewCell>
+</DataTemplate>

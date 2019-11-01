@@ -1,18 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
-    x:Class="ChequeCashing.Views.VerifyPage"
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=netstandard"
-    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
-    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
-    xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
-    xmlns:control="clr-namespace:ChequeCashing.Controls"
-    xmlns:converter="clr-namespace:ChequeCashing.Converters"
-    NavigationPage.HasNavigationBar="True"
-    NavigationPage.HasBackButton="True"
-    Title="Cheque Details"
-    BackgroundColor="{DynamicResource Gray-100}">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converter="clr-namespace:ChequeCashing.Converters"
+             xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=netstandard"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:control="clr-namespace:ChequeCashing.Controls"
+             xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             mc:Ignorable="d"
+             x:Class="ChequeCashing.Views.PersonDetailsPage"
+             BackgroundColor="{DynamicResource Gray-100}"
+             NavigationPage.HasNavigationBar="True"
+             NavigationPage.HasBackButton="True"
+             Title="Person Details">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converter:BooleanToColorConverter x:Key="ColorConverter" />
@@ -21,26 +23,31 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
+    
     <ContentPage.Content>
+
         <ScrollView>
             <StackLayout Padding="16">
                 <Label Style="{StaticResource HeaderLabelStyle}" 
                        Text="General Information" />
                 <StackLayout>
-                    
-                    
-                    <border:SfBorder BorderColor="{Binding Source={x:Reference ChequeNumber}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"                    Style="{StaticResource FormBorderStyle}">
-                        <control:BorderlessEntry x:Name="ChequeNumber"
+                    <border:SfBorder BorderColor="{Binding Source={x:Reference Name}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"                    Style="{StaticResource FormBorderStyle}">
+                        <control:BorderlessEntry x:Name="Name"
                                                  HeightRequest="38"
-                                                 Text="{Binding ChequeTransaction.ChequeNumber}"
-                                                 Placeholder="Cheque Number"
+                                                 Placeholder="Name"
                                                  Style="{StaticResource EntryTextStyle}" />
                     </border:SfBorder>
 
-                    <border:SfBorder BorderColor="{Binding Source={x:Reference ToPersonName}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"                    Style="{StaticResource FormBorderStyle}">
-                        <control:BorderlessEntry x:Name="ToPersonName"
-                                                 Placeholder="To Person Name"
-                                                 Text="{Binding ChequeTransaction.ToPersonName}"
+                    <border:SfBorder BorderColor="{Binding Source={x:Reference Address}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"                    Style="{StaticResource FormBorderStyle}">
+                        <control:BorderlessEntry x:Name="Address"
+                                                 Placeholder="Address"
+                                                 HeightRequest="38"
+                                                 Style="{StaticResource EntryTextStyle}" />
+                    </border:SfBorder>
+
+                    <border:SfBorder BorderColor="{Binding Source={x:Reference MobileNumber}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"                    Style="{StaticResource FormBorderStyle}">
+                        <control:BorderlessEntry x:Name="MobileNumber"
+                                                 Placeholder="Mobile Number"
                                                  HeightRequest="38"
                                                  Style="{StaticResource EntryTextStyle}" />
                     </border:SfBorder>
@@ -52,25 +59,25 @@
                                                     FontFamily="{StaticResource Montserrat-Regular}"
                                                     FontSize="16"
                                                     HeightRequest="50"
-                                                    DateSelected="CustomDatePicker_DateSelected"
                                                     Format="dd/MM/yy"
-                                                    PlaceHolderText="DD/MM/YY"
+                                                    PlaceHolderText="Date of birth"
                                                     TextColor="{DynamicResource Gray-900}" />
 
                     </border:SfBorder>
-                    
+
                     <border:SfBorder Padding="6,0,0,0"
-                                     BorderColor="{Binding Source={x:Reference ChequeType}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                                     BorderColor="{Binding Source={x:Reference IdType}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
                                      Style="{StaticResource FormBorderStyle}">
-                        <combobox:SfComboBox x:Name="ChequeType"
+                        <combobox:SfComboBox x:Name="IdType"
                                              Style="{StaticResource ComboBoxStyle}"
-                                             Watermark="Cheque Type"
-                                             Text="{Binding ChequeTransaction.Type}"
+                                             Watermark="ID Type"
                                              HeightRequest="50">
                             <combobox:SfComboBox.ComboBoxSource>
                                 <ListCollection:List x:TypeArguments="x:String">
-                                    <x:String>Personal</x:String>
-                                    <x:String>Company</x:String>
+                                    <x:String>Aadhar Card</x:String>
+                                    <x:String>Voter ID</x:String>
+                                    <x:String>PAN Card</x:String>
+                                    <x:String>Driving License</x:String>
                                 </ListCollection:List>
                             </combobox:SfComboBox.ComboBoxSource>
                             <combobox:SfComboBox.DropDownButtonSettings>
@@ -90,26 +97,22 @@
                     </border:SfBorder>
                 </StackLayout>
 
-                <border:SfBorder BorderColor="{Binding Source={x:Reference Amount}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"                              Style="{StaticResource FormBorderStyle}">
-                    <control:BorderlessEntry x:Name="Amount"
-                                             HeightRequest="38"
-                                             Text="{Binding ChequeTransaction.Amount}"
-                                             Placeholder="Amount"
-                                             Style="{StaticResource EntryTextStyle}" />
-                </border:SfBorder>
-                
                 <buttons:SfButton HorizontalOptions="Center"
-                                  VerticalOptions="End"
-                                  Command="{Binding VerifyCommand}"
                                   Style="{StaticResource SfButtonStyle}"
-                                  Text="VERIFY CHEQUE"
+                                  Text="Take Photo"
+                                  Command="{Binding TakePhotoTappedCommand}"
+                                  VerticalOptions="Center"
                                   HeightRequest="50"/>
 
-                <!--<buttons:SfButton HorizontalOptions="Center"
+                <buttons:SfButton HorizontalOptions="Center"
                                   Style="{StaticResource SfButtonStyle}"
-                                  Text="PERSON DETAILS"
-                                  HeightRequest="50"/>-->
+                                  Text="SUBMIT"
+                                  VerticalOptions="Center"
+                                  HeightRequest="50"/>
+
             </StackLayout>
         </ScrollView>
+        
     </ContentPage.Content>
+
 </ContentPage>

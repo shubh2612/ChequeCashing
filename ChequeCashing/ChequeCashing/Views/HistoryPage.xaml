@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converter="clr-namespace:ChequeCashing.Converters"
+             xmlns:templates="clr-namespace:ChequeCashing.Template"
+             xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             mc:Ignorable="d"
+             x:Class="ChequeCashing.Views.HistoryPage"
+             NavigationPage.HasNavigationBar="True"
+             NavigationPage.HasBackButton="True"
+             Title="History"
+             BackgroundColor="{DynamicResource Gray-100}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="ColorConverter" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid>
+            <listview:SfListView AutoFitMode="Height"
+                             x:Name="ListviewItems"
+                             ItemsSource="{Binding HistoryItem}"                             
+                             SelectionBackgroundColor="{DynamicResource Gray-100}">
+
+                <listview:SfListView.ItemTemplate>
+                    <templates:ListTemplate/>
+                </listview:SfListView.ItemTemplate>
+            </listview:SfListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
