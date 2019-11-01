@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ChequeCashing.Views.VerifyPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=netstandard"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+    xmlns:control="clr-namespace:ChequeCashing.Controls"
+    xmlns:converter="clr-namespace:ChequeCashing.Converters"
+    Title="Cash Your Cheque"
+    BackgroundColor="{DynamicResource Gray-100}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="ColorConverter" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="16">
+                <Label Style="{StaticResource HeaderLabelStyle}" 
+                       Text="General Information" />
+                <StackLayout>
+                    
+                    
+                    <border:SfBorder BorderColor="{Binding Source={x:Reference ChequeNumber}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"                    Style="{StaticResource FormBorderStyle}">
+                        <control:BorderlessEntry x:Name="ChequeNumber"
+                                                 HeightRequest="38"
+                                                 Placeholder="Cheque Number"
+                                                 Style="{StaticResource EntryTextStyle}" />
+                    </border:SfBorder>
+
+                    <border:SfBorder BorderColor="{Binding Source={x:Reference ToPersonName}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"                    Style="{StaticResource FormBorderStyle}">
+                        <control:BorderlessEntry x:Name="ToPersonName"
+                                                 Placeholder="To Person Name"
+                                                 HeightRequest="38"
+                                                 Style="{StaticResource EntryTextStyle}" />
+                    </border:SfBorder>
+
+                    <border:SfBorder Padding="12,0,0,0"
+                                     Style="{StaticResource FormBorderStyle}">
+
+                        <control:CalenderDatePicker x:Name="CustomDatePicker"
+                                                    FontFamily="{StaticResource Montserrat-Regular}"
+                                                    FontSize="16"
+                                                    HeightRequest="50"
+                                                    Format="dd/MM/yy"
+                                                    PlaceHolderText="DD/MM/YY"
+                                                    TextColor="{DynamicResource Gray-900}" />
+
+                    </border:SfBorder>
+                    
+                    <border:SfBorder Padding="6,0,0,0"
+                                     BorderColor="{Binding Source={x:Reference ChequeType}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                                     Style="{StaticResource FormBorderStyle}">
+                        <combobox:SfComboBox x:Name="ChequeType"
+                                             Style="{StaticResource ComboBoxStyle}"
+                                             Watermark="Cheque Type"
+                                             HeightRequest="50">
+                            <combobox:SfComboBox.ComboBoxSource>
+                                <ListCollection:List x:TypeArguments="x:String">
+                                    <x:String>Personal</x:String>
+                                    <x:String>Company</x:String>
+                                </ListCollection:List>
+                            </combobox:SfComboBox.ComboBoxSource>
+                            <combobox:SfComboBox.DropDownButtonSettings>
+                                <combobox:DropDownButtonSettings Width="30" Height="30">
+                                    <combobox:DropDownButtonSettings.View>
+                                        <Label Margin="0"
+                                               FontFamily="{StaticResource FontIcons}"
+                                               FontSize="25"
+                                               HorizontalTextAlignment="Center"
+                                               Text="{StaticResource DropDownButtonIcon}"
+                                               TextColor="{DynamicResource Gray-600}"
+                                               VerticalTextAlignment="Center" />
+                                    </combobox:DropDownButtonSettings.View>
+                                </combobox:DropDownButtonSettings>
+                            </combobox:SfComboBox.DropDownButtonSettings>
+                        </combobox:SfComboBox>
+                    </border:SfBorder>
+                </StackLayout>
+
+                <border:SfBorder BorderColor="{Binding Source={x:Reference Amount}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"                              Style="{StaticResource FormBorderStyle}">
+                    <control:BorderlessEntry x:Name="Amount"
+                                             HeightRequest="38"
+                                             Placeholder="Amount"
+                                             Style="{StaticResource EntryTextStyle}" />
+                </border:SfBorder>
+                
+                <buttons:SfButton HorizontalOptions="Center"
+                                  Style="{StaticResource SfButtonStyle}"
+                                  Text="VERIFY CHEQUE"
+                                  HeightRequest="50"/>
+
+                <buttons:SfButton HorizontalOptions="Center"
+                                  Style="{StaticResource SfButtonStyle}"
+                                  Text="PERSON DETAILS"
+                                  HeightRequest="50"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
