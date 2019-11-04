@@ -51,6 +51,7 @@
                         <control:CalenderDatePicker x:Name="CustomDatePicker"
                                                     FontFamily="{StaticResource Montserrat-Regular}"
                                                     FontSize="16"
+                                                    Date="{Binding ChequeTransaction.DateOnCheque}"
                                                     HeightRequest="50"
                                                     DateSelected="CustomDatePicker_DateSelected"
                                                     Format="dd/MM/yy"

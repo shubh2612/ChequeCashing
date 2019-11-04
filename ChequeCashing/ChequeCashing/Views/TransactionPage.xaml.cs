@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChequeCashing.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,13 @@ namespace ChequeCashing.Views
         public TransactionPage()
         {
             InitializeComponent();
+            BindingContext = new TransactionViewModel();
+        }
+
+        private void CustomDatePicker_DateSelected(object sender, DateChangedEventArgs e)
+        {
+            var date = ((DatePicker)sender).Date;
+            ((TransactionViewModel)this.BindingContext).SelectedDate = date;
         }
     }
 }

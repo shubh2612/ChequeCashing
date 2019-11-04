@@ -12,11 +12,12 @@ namespace ChequeCashing.Model
         public string Status { get; set; }
         public string From { get; set; }
         public string ToPersonName { get; set; }
-        public int Amount { get; set; }
-        public string To { get; set; }
+        public string Amount { get; set; }
+        public string GivenAmount { get; set; }
+        public string To { get; set; } 
         public string RemainingAmount { get; set; }
         public DateTime DateOnCheque { get; set; }
-        public string DateOfSubmission { get; set; }
+        public DateTime DateOfSubmission { get; set; }
         public string Company { get; set; }
         public string Type { get; set; }
     }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.WindowsAzure.Storage.Table;
 using Newtonsoft.Json;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,11 +9,16 @@ using Xamarin.Forms;
 
 namespace ChequeCashing.Model
 {
+    [Table("Person")]
     public class Person : BaseModel
     {
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Mobile { get; set; }
-        public string DOB { get; set; }
+        public string Address { get; set; }
+        public DateTime DOB { get; set; }
+        public string IdentityProof { get; set; }
 
         private string _imageUrl;
         public string ImageUrl

@@ -34,6 +34,7 @@
                     <border:SfBorder BorderColor="{Binding Source={x:Reference Name}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"                    Style="{StaticResource FormBorderStyle}">
                         <control:BorderlessEntry x:Name="Name"
                                                  HeightRequest="38"
+                                                 Text="{Binding Person.Name}"
                                                  Placeholder="Name"
                                                  Style="{StaticResource EntryTextStyle}" />
                     </border:SfBorder>
@@ -41,6 +42,7 @@
                     <border:SfBorder BorderColor="{Binding Source={x:Reference Address}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"                    Style="{StaticResource FormBorderStyle}">
                         <control:BorderlessEntry x:Name="Address"
                                                  Placeholder="Address"
+                                                 Text="{Binding Person.Address}"
                                                  HeightRequest="38"
                                                  Style="{StaticResource EntryTextStyle}" />
                     </border:SfBorder>
@@ -48,6 +50,7 @@
                     <border:SfBorder BorderColor="{Binding Source={x:Reference MobileNumber}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"                    Style="{StaticResource FormBorderStyle}">
                         <control:BorderlessEntry x:Name="MobileNumber"
                                                  Placeholder="Mobile Number"
+                                                 Text="{Binding Person.Mobile}"
                                                  HeightRequest="38"
                                                  Style="{StaticResource EntryTextStyle}" />
                     </border:SfBorder>
@@ -58,9 +61,11 @@
                         <control:CalenderDatePicker x:Name="CustomDatePicker"
                                                     FontFamily="{StaticResource Montserrat-Regular}"
                                                     FontSize="16"
+                                                    Date="{Binding Person.DOB}"
                                                     HeightRequest="50"
                                                     Format="dd/MM/yy"
                                                     PlaceHolderText="Date of birth"
+                                                    DateSelected="CustomDatePicker_DateSelected"
                                                     TextColor="{DynamicResource Gray-900}" />
 
                     </border:SfBorder>
@@ -71,6 +76,7 @@
                         <combobox:SfComboBox x:Name="IdType"
                                              Style="{StaticResource ComboBoxStyle}"
                                              Watermark="ID Type"
+                                             Text="{Binding Person.IdentityProof}"
                                              HeightRequest="50">
                             <combobox:SfComboBox.ComboBoxSource>
                                 <ListCollection:List x:TypeArguments="x:String">
@@ -106,7 +112,8 @@
 
                 <buttons:SfButton HorizontalOptions="Center"
                                   Style="{StaticResource SfButtonStyle}"
-                                  Text="SUBMIT"
+                                  Command="{Binding SubmitCommand}"
+                                  Text="Submit"
                                   VerticalOptions="Center"
                                   HeightRequest="50"/>
 

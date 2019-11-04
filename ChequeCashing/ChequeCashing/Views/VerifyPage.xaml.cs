@@ -19,7 +19,7 @@ namespace ChequeCashing.Views
         private void CustomDatePicker_DateSelected(object sender, DateChangedEventArgs e)
         {
             var date = ((DatePicker)sender).Date;
-            ((VerifyViewModel)this.BindingContext).SelectedDate = date.ToString("MM/dd/yyyy");
+            ((VerifyViewModel)this.BindingContext).SelectedDate = date;
         }
     }
 }

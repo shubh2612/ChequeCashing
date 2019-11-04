@@ -32,6 +32,7 @@
                                      Style="{StaticResource FormBorderStyle}">
                         <control:BorderlessEntry x:Name="To"
                                                  HeightRequest="38"
+                                                 Text="{Binding ChequeTransaction.To}"
                                                  Placeholder="To"
                                                  Style="{StaticResource EntryTextStyle}"/>
                     </border:SfBorder>
@@ -43,7 +44,9 @@
                                                     FontFamily="{StaticResource Montserrat-Regular}"
                                                     FontSize="16"
                                                     HeightRequest="50"
+                                                    DateSelected="CustomDatePicker_DateSelected"
                                                     Format="dd/MM/yy"
+                                                    Date="{Binding ChequeTransaction.DateOfSubmission}"
                                                     PlaceHolderText="DD/MM/YY"
                                                     TextColor="{DynamicResource Gray-900}" />
 
@@ -53,6 +56,7 @@
                                      Style="{StaticResource FormBorderStyle}">
                         <control:BorderlessEntry x:Name="Amount"
                                                  HeightRequest="38"
+                                                 Text="{Binding ChequeTransaction.GivenAmount}"
                                                  Placeholder="Amount"
                                                  Style="{StaticResource EntryTextStyle}"/>
                     </border:SfBorder>
@@ -61,6 +65,7 @@
                                      Style="{StaticResource FormBorderStyle}">
                         <control:BorderlessEntry x:Name="RemainingAmount"
                                                  HeightRequest="38"
+                                                 Text="{Binding ChequeTransaction.RemainingAmount}"
                                                  Placeholder="Remaining Amount"
                                                  Style="{StaticResource EntryTextStyle}"/>
                     </border:SfBorder>
@@ -69,6 +74,7 @@
                 <buttons:SfButton HorizontalOptions="Center"
                                   Style="{StaticResource SfButtonStyle}"
                                   Text="SUBMIT"
+                                  Command="{Binding SubmitCommand}"
                                   VerticalOptions="Center"
                                   HeightRequest="50"/>
 

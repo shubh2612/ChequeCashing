@@ -1,8 +1,6 @@
 ﻿using ChequeCashing.Helper;
 using ChequeCashing.Model;
 using ChequeCashing.Views;
-using Plugin.Media;
-using Plugin.Media.Abstractions;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -10,13 +8,11 @@ using Xamarin.Forms;
 
 namespace ChequeCashing.ViewModel
 {
-    public class VerifyViewModel : BaseViewModel
+    public class TransactionViewModel : BaseViewModel
     {
-
-        public ICommand VerifyCommand { get; set; }
+        public ICommand SubmitCommand { get; set; }
 
         private DateTime _selectedDate;
-
         public DateTime SelectedDate
         {
             get { return _selectedDate; }
@@ -24,30 +20,38 @@ namespace ChequeCashing.ViewModel
         }
 
         private ChequeTransaction chequeTransaction;
-
         public ChequeTransaction ChequeTransaction
         {
             get { return chequeTransaction; }
             set { chequeTransaction = value; OnPropertyChanged(nameof(ChequeTransaction)); }
         }
 
-
-        public VerifyViewModel()
+        public TransactionViewModel()
         {
             ChequeTransaction = new ChequeTransaction();
-            VerifyCommand = new Command(VerifyTapped);
+            SubmitCommand = new Command(SubmitButtonTapped);
         }
 
-        private async void VerifyTapped(object obj)
+        private async void SubmitButtonTapped(object obj)
         {
-            ChequeTransaction.DateOnCheque = SelectedDate;
+            if (ChequeTransaction.RemainingAmount == null || ChequeTransaction.RemainingAmount == "0")
+            {
+                ChequeTransaction.RemainingAmount = "0";
+                ChequeTransaction.Status = "Closed";
+                ChequeTransaction.DateOfSubmission = SelectedDate;
+            }
+            else
+            {
+                ChequeTransaction.Status = "Remaining Amount Left";
+                ChequeTransaction.DateOfSubmission = SelectedDate;
+            }
             await SaveContent();
         }
 
         private async Task SaveContent()
         {
             var _transactionDetailRepository = new TransactionDetailRepository();
-            bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Verify Cheque Deatils", "Do you want to continue?", "OK", "Cancel");
+            bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Transaction Deatils", "Do you want to continue?", "OK", "Cancel");
             if (isUserAccept)
             {
                 _transactionDetailRepository.InsertData(ChequeTransaction);

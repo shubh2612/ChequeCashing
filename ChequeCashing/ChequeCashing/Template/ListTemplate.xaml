@@ -34,8 +34,8 @@
 
                 <StackLayout Orientation="Horizontal">
                     <Label Text="Date:"/>
-                    <Label Text="{Binding Date}"                       
-                       IsVisible="{Binding Date, Converter={StaticResource TextToVisibilityConverter}}"/>
+                    <Label Text="{Binding DateOfSubmission}"                       
+                       IsVisible="{Binding DateOfSubmission, Converter={StaticResource TextToVisibilityConverter}}"/>
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal"

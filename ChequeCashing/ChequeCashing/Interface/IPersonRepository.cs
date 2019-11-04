@@ -5,10 +5,10 @@ using System.Text;
 
 namespace ChequeCashing.Interface
 {
-    public interface ITransactionDetailsRepository
+    public interface IPersonRepository
     {
-        List<ChequeTransaction> GetAllData();
+        List<Person> GetAllData();
 
-        void InsertData(ChequeTransaction cheques);
+        void InsertData(Person person);
     }
 }

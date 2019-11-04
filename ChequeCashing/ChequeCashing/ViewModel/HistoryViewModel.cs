@@ -1,17 +1,22 @@
-﻿using ChequeCashing.Model;
+﻿using ChequeCashing.Interface;
+using ChequeCashing.Model;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ChequeCashing.ViewModel
 {
     public class HistoryViewModel : BaseViewModel
     {
-        private List<ChequeTransaction> _historyItem;
+        public SQLiteConnection conn;
+        public HistoryViewModel regmodel;
 
-        public List<ChequeTransaction> HistoryItem
+        private ObservableCollection<ChequeTransaction> _historyItem;
+        public ObservableCollection<ChequeTransaction> HistoryItem
         {
             get { return _historyItem; }
             set { _historyItem = value; }
@@ -19,18 +24,15 @@ namespace ChequeCashing.ViewModel
 
         public HistoryViewModel()
         {
-            LoadData();
+            //conn = DependencyService.Get<ISqlite>().GetConnection();
+            //conn.CreateTable<ChequeTransaction>();
+            //LoadData();
         }
 
         public async override Task LoadData()
         {
-            HistoryItem = new List<ChequeTransaction>
-            {
-                new ChequeTransaction{ ChequeNumber = "12345", Status = "Done", DateOfSubmission ="10/10/2019", RemainingAmount = "0"},
-                new ChequeTransaction{ ChequeNumber = "23145", Status = "Remaining Amount Left", DateOfSubmission ="11/10/2019", RemainingAmount = "2000"},
-                new ChequeTransaction{ ChequeNumber = "36541", Status = "Done", DateOfSubmission ="12/10/2019", RemainingAmount = "0"},
-                new ChequeTransaction{ ChequeNumber = "74125", Status = "Done", DateOfSubmission ="13/10/2019", RemainingAmount = "0"}
-            };
+            var items = (from x in conn.Table<ChequeTransaction>() orderby x.Id descending select x).ToList();
+            HistoryItem = new ObservableCollection<ChequeTransaction>(items);
         }
 
     }

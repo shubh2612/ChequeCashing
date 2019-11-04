@@ -18,5 +18,11 @@ namespace ChequeCashing.Views
             InitializeComponent();
             BindingContext = new PersonDetailsViewModel();
         }
+
+        private void CustomDatePicker_DateSelected(object sender, DateChangedEventArgs e)
+        {
+            var date = ((DatePicker)sender).Date;
+            ((PersonDetailsViewModel)this.BindingContext).SelectedDate = date;
+        }
     }
 }
