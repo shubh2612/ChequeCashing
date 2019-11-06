@@ -1,4 +1,5 @@
-﻿using ChequeCashing.ViewModel;
+﻿using ChequeCashing.Abstractions;
+using ChequeCashing.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ using Xamarin.Forms.Xaml;
 namespace ChequeCashing.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Dashboard : ContentPage
+    public partial class Dashboard : BaseContentPage
     {
         public Dashboard()
         {
@@ -20,7 +21,7 @@ namespace ChequeCashing.Views
         }
 
         private void HistoryClicked(object sender, EventArgs e)
-        {
+         {
             App.navigationPage.PushAsync(new HistoryPage());
         }
 

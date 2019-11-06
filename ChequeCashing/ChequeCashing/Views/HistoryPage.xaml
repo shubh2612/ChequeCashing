@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<abstractions:BaseContentPage
+    xmlns:abstractions="clr-namespace:ChequeCashing.Abstractions"
+    xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -13,26 +15,26 @@
              Title="History"
              BackgroundColor="{DynamicResource Gray-100}">
 
-    <ContentPage.Resources>
+    <abstractions:BaseContentPage.Resources>
         <ResourceDictionary>
             <converter:BooleanToColorConverter x:Key="ColorConverter" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </ContentPage.Resources>
+    </abstractions:BaseContentPage.Resources>
 
-    <ContentPage.Content>
-        <Grid>
-            <listview:SfListView AutoFitMode="Height"
+    <Grid>
+        <listview:SfListView AutoFitMode="Height"
                              x:Name="ListviewItems"
-                             ItemsSource="{Binding HistoryItem}"                             
-                             SelectionBackgroundColor="{DynamicResource Gray-100}">
+                             ItemsSource="{Binding HistoryItem}"  
+                            >
 
-                <listview:SfListView.ItemTemplate>
-                    <templates:ListTemplate/>
-                </listview:SfListView.ItemTemplate>
-            </listview:SfListView>
-        </Grid>
-    </ContentPage.Content>
-</ContentPage>
+            <listview:SfListView.ItemTemplate>
+                <templates:ListTemplate/>
+            </listview:SfListView.ItemTemplate>
+        </listview:SfListView>
+
+        <Label Text="HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII"/>
+    </Grid>
+</abstractions:BaseContentPage>

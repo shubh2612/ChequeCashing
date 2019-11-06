@@ -8,6 +8,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using Syncfusion.ListView.XForms.iOS;
 
 namespace ChequeCashing.iOS
 {
@@ -31,6 +32,7 @@ namespace ChequeCashing.iOS
             SfComboBoxRenderer.Init();
             SfCalendarRenderer.Init();
             SfButtonRenderer.Init();
+            SfListViewRenderer.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

@@ -50,11 +50,11 @@ namespace ChequeCashing.ViewModel
 
         private async Task SaveContent()
         {
-            var _transactionDetailRepository = new TransactionDetailRepository();
+            //var _transactionDetailRepository = new TransactionDetailRepository();
             bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Transaction Deatils", "Do you want to continue?", "OK", "Cancel");
             if (isUserAccept)
             {
-                _transactionDetailRepository.InsertData(ChequeTransaction);
+                await App.Database.SaveItemAsync(ChequeTransaction);
                 var page = FindPageByType(typeof(Dashboard));
                 var vm = (DashboardViewModel)page.BindingContext;
                 //vm.Item.Insert(0, saveContent);

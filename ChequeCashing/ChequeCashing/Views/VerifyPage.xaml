@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
+<abstractions:BaseContentPage
+    xmlns:abstractions="clr-namespace:ChequeCashing.Abstractions"
     x:Class="ChequeCashing.Views.VerifyPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -113,4 +114,4 @@
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
-</ContentPage>
+</abstractions:BaseContentPage>

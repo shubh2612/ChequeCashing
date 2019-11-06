@@ -15,6 +15,7 @@ namespace ChequeCashing.ViewModel
 
         public bool IsLoaded { get; set; }
 
+
         
 
         private string _icon;

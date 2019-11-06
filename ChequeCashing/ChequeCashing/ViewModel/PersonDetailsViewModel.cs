@@ -46,11 +46,11 @@ namespace ChequeCashing.ViewModel
 
         private async Task SaveContent()
         {
-            var _personRepository = new PersonRepository();
+            //var _personRepository = new PersonRepository();
             bool isUserAccept = await Application.Current.MainPage.DisplayAlert("Verify Person Deatils", "Do you want to continue?", "OK", "Cancel");
             if (isUserAccept)
             {
-                _personRepository.InsertData(Person);
+                await App.Database.SavePersonAsync(Person);
                 var page = FindPageByType(typeof(Dashboard));
                 var vm = (DashboardViewModel)page.BindingContext;
                 //vm.Item.Insert(0, saveContent);

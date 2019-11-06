@@ -1,4 +1,5 @@
-﻿using ChequeCashing.Model;
+﻿using ChequeCashing.Abstractions;
+using ChequeCashing.Model;
 using ChequeCashing.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -8,7 +9,7 @@ namespace ChequeCashing.Views
 {
     [Preserve(AllMembers = true)]
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class VerifyPage : ContentPage
+    public partial class VerifyPage : BaseContentPage
     {
         public VerifyPage()
         {
