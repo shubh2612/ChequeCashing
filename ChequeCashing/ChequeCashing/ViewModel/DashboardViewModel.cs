@@ -1,4 +1,5 @@
-﻿using ChequeCashing.Views;
+﻿using ChequeCashing.Model;
+using ChequeCashing.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,6 +11,8 @@ namespace ChequeCashing.ViewModel
     class DashboardViewModel : BaseViewModel
     {
         public ICommand ChequeDetailsCommand { get; set; }
+
+        
 
         public DashboardViewModel()
         {

@@ -35,6 +35,6 @@
             </listview:SfListView.ItemTemplate>
         </listview:SfListView>
 
-        <Label Text="HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII"/>
+        
     </Grid>
 </abstractions:BaseContentPage>

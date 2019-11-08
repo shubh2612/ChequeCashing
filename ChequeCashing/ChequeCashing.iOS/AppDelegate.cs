@@ -9,6 +9,8 @@ using System.Linq;
 using Foundation;
 using UIKit;
 using Syncfusion.ListView.XForms.iOS;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.iOS;
 
 namespace ChequeCashing.iOS
 {
@@ -34,6 +36,12 @@ namespace ChequeCashing.iOS
             SfButtonRenderer.Init();
             SfListViewRenderer.Init();
             LoadApplication(new App());
+
+            UIView statusBar = UIApplication.SharedApplication.ValueForKey(new NSString("statusBar")) as UIView;
+            if (statusBar != null && statusBar.RespondsToSelector(new ObjCRuntime.Selector("setBackgroundColor:")))
+            {
+                statusBar.BackgroundColor = Color.Black.ToUIColor(); // change to your desired color 
+            }
 
             return base.FinishedLaunching(app, options);
         }

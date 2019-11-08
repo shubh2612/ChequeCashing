@@ -18,6 +18,7 @@ namespace ChequeCashing.Views
         {
             InitializeComponent();
             BindingContext = new PersonDetailsViewModel();
+            CustomDatePicker.MinimumDate = DateTime.Now;
         }
 
         private void CustomDatePicker_DateSelected(object sender, DateChangedEventArgs e)

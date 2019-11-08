@@ -52,6 +52,7 @@ namespace ChequeCashing.ViewModel
             {
                 await App.Database.SaveItemAsync(ChequeTransaction);
                 var page = FindPageByType(typeof(Dashboard));
+                ((Dashboard)page).ChequeTransaction = ChequeTransaction;
                 var vm = (DashboardViewModel)page.BindingContext;
                 //vm.Item.Insert(0, saveContent);
                 await App.navigationPage.PopAsync();

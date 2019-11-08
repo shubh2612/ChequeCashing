@@ -1,4 +1,5 @@
 ﻿using ChequeCashing.Abstractions;
+using ChequeCashing.Model;
 using ChequeCashing.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,14 @@ namespace ChequeCashing.Views
             BindingContext = new DashboardViewModel();
         }
 
+        private ChequeTransaction chequeTransaction;
+
+        public ChequeTransaction ChequeTransaction
+        {
+            get { return chequeTransaction; }
+            set { chequeTransaction = value; OnPropertyChanged(nameof(ChequeTransaction)); }
+        }
+
         private void HistoryClicked(object sender, EventArgs e)
          {
             App.navigationPage.PushAsync(new HistoryPage());
@@ -37,7 +46,7 @@ namespace ChequeCashing.Views
 
         private void TransactionClicked(object sender, EventArgs e)
         {
-            App.navigationPage.PushAsync(new TransactionPage());
+            App.navigationPage.PushAsync(new TransactionPage(ChequeTransaction));
         }
     }
 }

@@ -9,7 +9,7 @@ using Xamarin.Forms;
 namespace ChequeCashing.ViewModel
 {
     public class TransactionViewModel : BaseViewModel
-    {
+    {    
         public ICommand SubmitCommand { get; set; }
 
         private DateTime _selectedDate;
@@ -26,9 +26,9 @@ namespace ChequeCashing.ViewModel
             set { chequeTransaction = value; OnPropertyChanged(nameof(ChequeTransaction)); }
         }
 
-        public TransactionViewModel()
+        public TransactionViewModel(ChequeTransaction chequeTransaction)
         {
-            ChequeTransaction = new ChequeTransaction();
+            ChequeTransaction = chequeTransaction;
             SubmitCommand = new Command(SubmitButtonTapped);
         }
 

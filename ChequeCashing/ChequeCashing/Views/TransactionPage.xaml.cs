@@ -1,4 +1,5 @@
 ﻿using ChequeCashing.Abstractions;
+using ChequeCashing.Model;
 using ChequeCashing.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,11 @@ namespace ChequeCashing.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TransactionPage : BaseContentPage
     {
-        public TransactionPage()
+        public TransactionPage(ChequeTransaction chequeTransaction)
         {
             InitializeComponent();
-            BindingContext = new TransactionViewModel();
+            BindingContext = new TransactionViewModel(chequeTransaction);
+            CustomDatePicker.MinimumDate = DateTime.Now;
         }
 
         private void CustomDatePicker_DateSelected(object sender, DateChangedEventArgs e)
