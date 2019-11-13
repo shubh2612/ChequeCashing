@@ -22,27 +22,27 @@
                     <Label Text="Cheque Number:"
                            FontSize="20"/>
                     <Label Text="{Binding ChequeNumber}"  
-                       FontSize="20"
-                       IsVisible="{Binding ChequeNumber, Converter={StaticResource TextToVisibilityConverter}}"/>
+                           FontSize="20"
+                           IsVisible="{Binding ChequeNumber, Converter={StaticResource TextToVisibilityConverter}}"/>
                 </StackLayout>
                 
                 <StackLayout Orientation="Horizontal">
                     <Label Text="Remaining Amount:"/>
                     <Label Text="{Binding RemainingAmount}" 
-                       IsVisible="{Binding RemainingAmount, Converter={StaticResource TextToVisibilityConverter}}"/>
+                           IsVisible="{Binding RemainingAmount, Converter={StaticResource TextToVisibilityConverter}}"/>
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal">
                     <Label Text="Date:"/>
                     <Label Text="{Binding DateOfSubmission}"                       
-                       IsVisible="{Binding DateOfSubmission, Converter={StaticResource TextToVisibilityConverter}}"/>
+                           IsVisible="{Binding DateOfSubmission, Converter={StaticResource TextToVisibilityConverter}}"/>
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal"
-                                 Grid.Column="1">
+                             Grid.Column="1">
                     <Label Text="Status:"/>
                     <Label Text="{Binding Status}"                       
-                       IsVisible="{Binding Status, Converter={StaticResource TextToVisibilityConverter}}"/>
+                           IsVisible="{Binding Status, Converter={StaticResource TextToVisibilityConverter}}"/>
                 </StackLayout>
             </StackLayout>
 

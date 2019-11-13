@@ -1,22 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <abstractions:BaseContentPage  xmlns:abstractions="clr-namespace:ChequeCashing.Abstractions"
                                xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:converter="clr-namespace:ChequeCashing.Converters"
-             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
-             mc:Ignorable="d"
-             x:Class="ChequeCashing.Views.Dashboard"
-             NavigationPage.HasNavigationBar="True"
-             Title="Dashboard"
-             BackgroundColor="{DynamicResource Gray-100}">
+                               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                               xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                               xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=netstandard"
+                               xmlns:converter="clr-namespace:ChequeCashing.Converters"
+                               xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+                               xmlns:tabView="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
+                               xmlns:control="clr-namespace:ChequeCashing.Controls"
+                               xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+                               xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+                               xmlns:circleImage="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+                               mc:Ignorable="d"
+                               x:Class="ChequeCashing.Views.Dashboard"
+                               NavigationPage.HasNavigationBar="True"
+                               NavigationPage.HasBackButton="True"
+                               Title="Cheque Cashing"
+                               BackgroundColor="{DynamicResource Gray-100}">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="History"
-                     Clicked="HistoryClicked">
-        </ToolbarItem>
-    </ContentPage.ToolbarItems>
     
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -28,32 +30,377 @@
     </ContentPage.Resources>
     <ContentPage.Content>
 
-        <StackLayout Margin="10,0,10,0"
-                     VerticalOptions="Center"
-                     Spacing="15">
+        <tabView:SfTabView VisibleHeaderCount="3"
+                           TabHeaderPosition="Bottom" 
+                           TabHeaderBackgroundColor="#f54e5e"
+                           DisplayMode="Text"
+                           SelectedIndex="{Binding SelectedIndex}">
+            <tabView:SfTabView.SelectionIndicatorSettings>
+                <tabView:SelectionIndicatorSettings Color="White"/>
+            </tabView:SfTabView.SelectionIndicatorSettings>
+            <tabView:SfTabItem Title="1"
+                               TitleFontColor="White"
+                               SelectionColor="White">
+                <tabView:SfTabItem.Content>
+                    <Grid>
 
-            <buttons:SfButton HorizontalOptions="Center"
-                              Style="{StaticResource SfButtonStyle}"
-                              Text="CHEQUE DETAILS"
-                              HeightRequest="50"
-                              Clicked="ChequeDetailsButtonClicked"
-                              VerticalOptions="Center"/>
+                        <ScrollView>
+                            <StackLayout Padding="16">
+                                <Label Style="{StaticResource HeaderLabelStyle}" Text="Verify Cheque" />
+                                <StackLayout>
 
-            <buttons:SfButton HorizontalOptions="Center"
-                              Style="{StaticResource SfButtonStyle}"
-                              Text="PERSON DETAILS"
-                              Clicked="PersonDetailsButtonClicked"
-                              VerticalOptions="Center"
-                              HeightRequest="50"/>
+                                    <border:SfBorder BorderColor="{Binding Source={x:Reference ChequeNumber}, 
+                                                                           Path=IsFocused, 
+                                                                           Converter={StaticResource ColorConverter}, 
+                                                                           ConverterParameter=3}" 
+                                                     Style="{StaticResource FormBorderStyle}">
+                                        <control:BorderlessEntry x:Name="ChequeNumber"
+                                                                 HeightRequest="38"
+                                                                 Keyboard="Numeric"
+                                                                 IsReadOnly="{Binding ReadOnly}"
+                                                                 Text="{Binding ChequeTransaction.ChequeNumber}"
+                                                                 Placeholder="Cheque Number"
+                                                                 Style="{StaticResource EntryTextStyle}" />
+                                    </border:SfBorder>
 
-            <buttons:SfButton HorizontalOptions="Center"
-                              Style="{StaticResource SfButtonStyle}"
-                              Text="TRANSACTION"
-                              Clicked="TransactionClicked"
-                              VerticalOptions="Center"
-                              HeightRequest="50"/>
+                                    <border:SfBorder BorderColor="{Binding Source={x:Reference ToPersonName}, 
+                                                                           Path=IsFocused, 
+                                                                           Converter={StaticResource ColorConverter}, 
+                                                                           ConverterParameter=3}" 
+                                                     Style="{StaticResource FormBorderStyle}">
+                                        <control:BorderlessEntry x:Name="ToPersonName"
+                                                                 Placeholder="To Person Name"
+                                                                 IsReadOnly="{Binding ReadOnly}"
+                                                                 Text="{Binding ChequeTransaction.ToPersonName}"
+                                                                 HeightRequest="38"
+                                                                 Style="{StaticResource EntryTextStyle}" />
+                                    </border:SfBorder>
 
-        </StackLayout>
+                                    <border:SfBorder Padding="12,0,0,0"
+                                                     Style="{StaticResource FormBorderStyle}"
+                                                     x:Name="CustomDatePickerForVerifyTab">
+
+                                        <!--<control:CalenderDatePicker x:Name="CustomDatePickerForVerifyTab"
+                                                    FontFamily="{StaticResource Montserrat-Regular}"
+                                                    FontSize="16"
+                                                    Date="{Binding ChequeTransaction.DateOnCheque}"
+                                                    HeightRequest="50"
+                                                    DateSelected="CustomDatePickerVerifyTab_DateSelected"
+                                                    Format="dd/MM/yy"
+                                                    PlaceHolderText="DD/MM/YY"
+                                                    TextColor="{DynamicResource Gray-900}" />-->
+
+                                    </border:SfBorder>
+
+                                    <border:SfBorder Padding="6,0,0,0"
+                                                     BorderColor="{Binding Source={x:Reference ChequeType}, 
+                                                                           Path=IsFocused, 
+                                                                           Converter={StaticResource ColorConverter}, 
+                                                                           ConverterParameter=3}"
+                                                     Style="{StaticResource FormBorderStyle}">
+                                        <combobox:SfComboBox x:Name="ChequeType"
+                                                             Style="{StaticResource ComboBoxStyle}"
+                                                             Watermark="Cheque Type"
+                                                             Text="{Binding ChequeTransaction.Type}"
+                                                             HeightRequest="50"
+                                                             IsEnabled="{Binding ReadOnlyCombobox}">
+                                            <combobox:SfComboBox.ComboBoxSource>
+                                                <ListCollection:List x:TypeArguments="x:String">
+                                                    <x:String>Personal</x:String>
+                                                    <x:String>Company</x:String>
+                                                </ListCollection:List>
+                                            </combobox:SfComboBox.ComboBoxSource>
+                                            <combobox:SfComboBox.DropDownButtonSettings>
+                                                <combobox:DropDownButtonSettings Width="30" Height="30">
+                                                    <combobox:DropDownButtonSettings.View>
+                                                        <Label Margin="0"
+                                                               FontFamily="{StaticResource FontIcons}"
+                                                               FontSize="25"
+                                                               HorizontalTextAlignment="Center"
+                                                               Text="{StaticResource DropDownButtonIcon}"
+                                                               TextColor="{DynamicResource Gray-600}"
+                                                               VerticalTextAlignment="Center" />
+                                                    </combobox:DropDownButtonSettings.View>
+                                                </combobox:DropDownButtonSettings>
+                                            </combobox:SfComboBox.DropDownButtonSettings>
+                                        </combobox:SfComboBox>
+                                    </border:SfBorder>
+                                </StackLayout>
+
+                                <border:SfBorder BorderColor="{Binding Source={x:Reference Amount}, 
+                                                                       Path=IsFocused, 
+                                                                       Converter={StaticResource ColorConverter}, 
+                                                                       ConverterParameter=3}" 
+                                                 Style="{StaticResource FormBorderStyle}">
+                                    <control:BorderlessEntry x:Name="Amount"
+                                                             HeightRequest="38"
+                                                             IsReadOnly="{Binding ReadOnly}"
+                                                             Text="{Binding ChequeTransaction.Amount}"
+                                                             Placeholder="Amount"
+                                                             Keyboard="Numeric"
+                                                             Style="{StaticResource EntryTextStyle}" />
+                                </border:SfBorder>
+                                
+                                <border:SfBorder BorderColor="#ced2d9" 
+                                                 Style="{StaticResource FormBorderStyle}">
+                                    <Frame WidthRequest="200"
+                                           HeightRequest="100"
+                                           BackgroundColor="Transparent"
+                                           HasShadow="False"
+                                           Padding="0">
+                                        <Image Source="{Binding ChequeTransaction.ChequeImageSource, Mode=TwoWay}"
+                                               Aspect="AspectFill"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"
+                                               HeightRequest="100"
+                                               WidthRequest="200"
+                                               Margin="0,5,0,5"
+                                               IsEnabled="{Binding ReadOnlyCombobox}">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding ChequeImageTappedCommand}"/>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </Frame>
+                                    
+                                </border:SfBorder>
+
+                                <buttons:SfButton HorizontalOptions="Center"
+                                                  VerticalOptions="End"
+                                                  Margin="0,10,0,0"
+                                                  Command="{Binding VerifyCommand}"
+                                                  IsVisible="{Binding VerifyButton}"
+                                                  Style="{StaticResource SfButtonStyle}"
+                                                  Text="VERIFY CHEQUE"
+                                                  HeightRequest="50"/>
+
+                            </StackLayout>
+                        </ScrollView>
+
+                    </Grid>
+                </tabView:SfTabItem.Content>
+            </tabView:SfTabItem>
+            
+            <tabView:SfTabItem Title="2" 
+                               TitleFontColor="White"
+                               SelectionColor="White">
+                <tabView:SfTabItem.Content>
+                    <Grid>
+
+                        <ScrollView>
+                            <StackLayout Padding="16">
+                                <Label Style="{StaticResource HeaderLabelStyle}" Text="Person Details" />
+                                <StackLayout>
+                                    <border:SfBorder BorderColor="{Binding Source={x:Reference Name}, 
+                                                                           Path=IsFocused, 
+                                                                           Converter={StaticResource ColorConverter}, 
+                                                                           ConverterParameter=3}" 
+                                                     Style="{StaticResource FormBorderStyle}">
+                                        <control:BorderlessEntry x:Name="Name"
+                                                                 HeightRequest="38"
+                                                                 IsReadOnly="{Binding ReadOnly}"
+                                                                 Text="{Binding ChequeTransaction.Name}"
+                                                                 Placeholder="Name"
+                                                                 Style="{StaticResource EntryTextStyle}" />
+                                    </border:SfBorder>
+
+                                    <border:SfBorder BorderColor="{Binding Source={x:Reference Address}, 
+                                                                           Path=IsFocused, 
+                                                                           Converter={StaticResource ColorConverter}, 
+                                                                           ConverterParameter=3}" 
+                                                     Style="{StaticResource FormBorderStyle}">
+                                        <control:BorderlessEntry x:Name="Address"
+                                                                 Placeholder="Address"
+                                                                 IsReadOnly="{Binding ReadOnly}"
+                                                                 Text="{Binding ChequeTransaction.Address}"
+                                                                 HeightRequest="38"
+                                                                 Style="{StaticResource EntryTextStyle}" />
+                                    </border:SfBorder>
+
+                                    <border:SfBorder BorderColor="{Binding Source={x:Reference MobileNumber}, 
+                                                                           Path=IsFocused, 
+                                                                           Converter={StaticResource ColorConverter}, 
+                                                                           ConverterParameter=3}" 
+                                                     Style="{StaticResource FormBorderStyle}">
+                                        <control:BorderlessEntry x:Name="MobileNumber"
+                                                                 Placeholder="Mobile Number"
+                                                                 Keyboard="Numeric"
+                                                                 IsReadOnly="{Binding ReadOnly}"
+                                                                 MaxLength="10"
+                                                                 Text="{Binding ChequeTransaction.Mobile}"
+                                                                 HeightRequest="38"
+                                                                 Style="{StaticResource EntryTextStyle}" />
+                                    </border:SfBorder>
+
+                                    <border:SfBorder Padding="12,0,0,0"
+                                                     Style="{StaticResource FormBorderStyle}"
+                                                     x:Name="CustomDatePickerForPersonDeytailTab">
+
+                                        <!--<control:CalenderDatePicker x:Name="CustomDatePickerForPersonDeytailTab"
+                                                                    FontFamily="{StaticResource Montserrat-Regular}"
+                                                                    FontSize="16"
+                                                                    Date="{Binding ChequeTransaction.DOB}"
+                                                                    HeightRequest="50"
+                                                                    Format="dd/MM/yy"
+                                                                    PlaceHolderText="Date of birth"
+                                                                    DateSelected="CustomDatePickerPersonTab_DateSelected"
+                                                                    TextColor="{DynamicResource Gray-900}" />-->
+
+                                    </border:SfBorder>
+
+                                    <border:SfBorder Padding="6,0,0,0"
+                                                     BorderColor="{Binding Source={x:Reference IdType}, 
+                                                                           Path=IsFocused, 
+                                                                           Converter={StaticResource ColorConverter}, 
+                                                                           ConverterParameter=3}"
+                                                     Style="{StaticResource FormBorderStyle}">
+                                        <combobox:SfComboBox x:Name="IdType"
+                                                             Style="{StaticResource ComboBoxStyle}"
+                                                             Watermark="ID Type"
+                                                             IsEnabled="{Binding ReadOnlyCombobox}"
+                                                             Text="{Binding ChequeTransaction.IdentityProof}"
+                                                             HeightRequest="50">
+                                            <combobox:SfComboBox.ComboBoxSource>
+                                                <ListCollection:List x:TypeArguments="x:String">
+                                                    <x:String>Aadhar Card</x:String>
+                                                    <x:String>Voter ID</x:String>
+                                                    <x:String>PAN Card</x:String>
+                                                    <x:String>Driving License</x:String>
+                                                </ListCollection:List>
+                                            </combobox:SfComboBox.ComboBoxSource>
+                                            <combobox:SfComboBox.DropDownButtonSettings>
+                                                <combobox:DropDownButtonSettings Width="30" Height="30">
+                                                    <combobox:DropDownButtonSettings.View>
+                                                        <Label Margin="0"
+                                                                FontFamily="{StaticResource FontIcons}"
+                                                                FontSize="25"
+                                                                HorizontalTextAlignment="Center"
+                                                                Text="{StaticResource DropDownButtonIcon}"
+                                                                TextColor="{DynamicResource Gray-600}"
+                                                                VerticalTextAlignment="Center" />
+                                                    </combobox:DropDownButtonSettings.View>
+                                                </combobox:DropDownButtonSettings>
+                                            </combobox:SfComboBox.DropDownButtonSettings>
+                                        </combobox:SfComboBox>
+                                    </border:SfBorder>
+                                </StackLayout>
+
+                                <Grid Padding="10">
+                                    <circleImage:CircleImage Source="{Binding ChequeTransaction.PhotoImageSource, Mode=TwoWay}"
+                                                             x:Name="ImagePerson"
+                                                             HorizontalOptions="Center"
+                                                             BorderThickness="1"
+                                                             IsEnabled="{Binding ReadOnlyCombobox}"
+                                                             BorderColor="#D8DADF"
+                                                             HeightRequest="100"
+                                                             WidthRequest="100"
+                                                             Aspect="AspectFill">
+                                        <circleImage:CircleImage.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding TakePhotoTappedCommand}"/>
+                                        </circleImage:CircleImage.GestureRecognizers>
+                                    </circleImage:CircleImage>
+                                </Grid>
+
+                                <buttons:SfButton HorizontalOptions="Center"
+                                                  Style="{StaticResource SfButtonStyle}"
+                                                  Command="{Binding SubmitPersonDetailCommand}"
+                                                  IsVisible="{Binding SubmitPerson}"
+                                                  Text="Submit"
+                                                  VerticalOptions="Center"
+                                                  HeightRequest="50"/>
+
+                            </StackLayout>
+                        </ScrollView>
+
+                    </Grid>
+                </tabView:SfTabItem.Content>
+            </tabView:SfTabItem>
+            
+            <tabView:SfTabItem Title="3"
+                               TitleFontColor="White"
+                               SelectionColor="White">
+                <tabView:SfTabItem.Content>
+                    
+                    <Grid>
+
+                        <ScrollView>
+                            <StackLayout Padding="16">
+                                <Label Style="{StaticResource HeaderLabelStyle}" Text="Transaction Information" />
+                                <StackLayout>
+                                    <border:SfBorder BorderColor="{Binding Source={x:Reference To},
+                                                                           Path=IsFocused, 
+                                                                           Converter={StaticResource  ColorConverter}, 
+                                                                           ConverterParameter=3}" 
+                                                     Style="{StaticResource FormBorderStyle}">
+                                        
+                                        <control:BorderlessEntry x:Name="To"
+                                                                 HeightRequest="38"
+                                                                 IsReadOnly="{Binding ReadOnly}"
+                                                                 Text="{Binding ChequeTransaction.To}"
+                                                                 Placeholder="To"
+                                                                 Style="{StaticResource EntryTextStyle}"/>
+                                    </border:SfBorder>
+
+                                    <border:SfBorder Padding="12,0,0,0"
+                                                     Style="{StaticResource FormBorderStyle}"
+                                                     x:Name="CustomDatePickerForTransaction">
+
+                                        <!--<control:CalenderDatePicker x:Name="CustomDatePickerForTransaction"
+                                                                    FontFamily="{StaticResource Montserrat-Regular}"
+                                                                    FontSize="16"
+                                                                    HeightRequest="50"
+                                                                    DateSelected="CustomDatePickerTransactionTab_DateSelected"
+                                                                    Format="dd/MM/yy"
+                                                                    Date="{Binding ChequeTransaction.DateOfSubmission, Mode=TwoWay}"
+                                                                    PlaceHolderText="DD/MM/YY"
+                                                                    TextColor="{DynamicResource Gray-900}" />-->
+
+                                    </border:SfBorder>
+
+                                    <border:SfBorder BorderColor="{Binding Source={x:Reference TransactionAmount}, 
+                                                                           Path=IsFocused, 
+                                                                           Converter={StaticResource ColorConverter}, 
+                                                                           ConverterParameter=3}" 
+                                                     Style="{StaticResource FormBorderStyle}">
+                                        <control:BorderlessEntry x:Name="TransactionAmount"
+                                                                 HeightRequest="38"
+                                                                 Keyboard="Numeric"
+                                                                 IsReadOnly="{Binding ReadOnly}"
+                                                                 Text="{Binding ChequeTransaction.GivenAmount}"
+                                                                 Placeholder="Amount"
+                                                                 Style="{StaticResource EntryTextStyle}"/>
+                                    </border:SfBorder>
+
+                                    <border:SfBorder BorderColor="{Binding Source={x:Reference RemainingAmount}, 
+                                                                           Path=IsFocused, 
+                                                                           Converter={StaticResource ColorConverter}, 
+                                                                           ConverterParameter=3}" 
+                                                     Style="{StaticResource FormBorderStyle}">
+                                        <control:BorderlessEntry x:Name="RemainingAmount"
+                                                                 HeightRequest="38"
+                                                                 Keyboard="Numeric"
+                                                                 IsReadOnly="{Binding ReadOnly}"
+                                                                 Text="{Binding ChequeTransaction.RemainingAmount}"
+                                                                 Placeholder="Remaining Amount"
+                                                                 Style="{StaticResource EntryTextStyle}"/>
+                                    </border:SfBorder>
+                                </StackLayout>
+
+                                <buttons:SfButton HorizontalOptions="Center"
+                                                  Style="{StaticResource SfButtonStyle}"
+                                                  Text="SUBMIT"
+                                                  IsVisible="{Binding SubmitTransaction}"
+                                                  Command="{Binding SubmitTransactionDetailCommand}"
+                                                  VerticalOptions="Center"
+                                                  HeightRequest="50"/>
+
+                            </StackLayout>
+                        </ScrollView>
+
+                    </Grid>
+                </tabView:SfTabItem.Content>
+            </tabView:SfTabItem>
+            
+        </tabView:SfTabView>
         
     </ContentPage.Content>
 </abstractions:BaseContentPage>

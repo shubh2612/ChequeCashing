@@ -13,5 +13,10 @@ namespace ChequeCashing.Views
             InitializeComponent();
             BindingContext = new HistoryViewModel();
         }
+
+        private void AddCheque(object sender, System.EventArgs e)
+        {
+            App.navigationPage.PushAsync(new Dashboard(null));
+        }
     }
 }

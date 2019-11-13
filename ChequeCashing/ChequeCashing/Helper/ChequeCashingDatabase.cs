@@ -15,7 +15,6 @@ namespace ChequeCashing.Helper
         {
             database = new SQLiteAsyncConnection(dbPath);
             database.CreateTableAsync<ChequeTransaction>().Wait();
-            database.CreateTableAsync<Person>().Wait();
         }
 
         public Task<List<ChequeTransaction>> GetItemsAsync()
@@ -45,7 +44,7 @@ namespace ChequeCashing.Helper
             }
         }
 
-        public Task<int> SavePersonAsync(Person item)
+        public Task<int> SavePersonAsync(ChequeTransaction item)
         {
             if (item.Id != 0)
             {

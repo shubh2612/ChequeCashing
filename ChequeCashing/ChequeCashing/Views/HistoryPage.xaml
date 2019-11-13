@@ -10,10 +10,14 @@
              xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              mc:Ignorable="d"
              x:Class="ChequeCashing.Views.HistoryPage"
-             NavigationPage.HasNavigationBar="True"
              NavigationPage.HasBackButton="True"
-             Title="History"
+             Title="Dasboard"
              BackgroundColor="{DynamicResource Gray-100}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="New"
+                     Clicked="AddCheque" IconImageSource="add.png">
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
 
     <abstractions:BaseContentPage.Resources>
         <ResourceDictionary>
@@ -27,8 +31,8 @@
     <Grid>
         <listview:SfListView AutoFitMode="Height"
                              x:Name="ListviewItems"
-                             ItemsSource="{Binding HistoryItem}"  
-                            >
+                             ItemsSource="{Binding HistoryItem}"
+                             TapCommand="{Binding ListItemTappedCommand}">
 
             <listview:SfListView.ItemTemplate>
                 <templates:ListTemplate/>

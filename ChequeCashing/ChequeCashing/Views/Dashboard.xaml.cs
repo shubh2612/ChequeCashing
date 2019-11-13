@@ -1,4 +1,5 @@
 ﻿using ChequeCashing.Abstractions;
+using ChequeCashing.Controls;
 using ChequeCashing.Model;
 using ChequeCashing.ViewModel;
 using System;
@@ -15,38 +16,122 @@ namespace ChequeCashing.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Dashboard : BaseContentPage
     {
-        public Dashboard()
+        public Dashboard(ChequeTransaction item)
         {
+            var cheque = new DashboardViewModel(item);
             InitializeComponent();
-            BindingContext = new DashboardViewModel();
+            BindingContext = cheque;
+            CreateDatePicker(item);
+
+            
         }
 
-        private ChequeTransaction chequeTransaction;
-
-        public ChequeTransaction ChequeTransaction
+        private void CreateDatePicker(ChequeTransaction item)
         {
-            get { return chequeTransaction; }
-            set { chequeTransaction = value; OnPropertyChanged(nameof(ChequeTransaction)); }
+            var DatePickerForVerifyTab = new CalenderDatePicker()
+            {
+                HorizontalOptions = LayoutOptions.Fill,
+                FontSize = 16,
+                HeightRequest = 50,
+                PlaceHolderText = "DD/MM/YY",
+                Format = "dd/MM/yy",
+                FontFamily = Device.RuntimePlatform == Device.iOS ? "Montserrat-Regular" : Device.RuntimePlatform == Device.Android ? "Montserrat-Regular.ttf#Montserrat-Regular" : "Assets/Montserrat-Regular.ttf#Montserrat-Regular",
+                TextColor = (Color)App.Current.Resources["Gray-900"], 
+            };
+            if (item != null)
+            {
+                DatePickerForVerifyTab.PlaceHolderText = item.DateOnCheque.ToString("dd/MM/yy");
+                DatePickerForVerifyTab.IsEnabled = false;
+            }
+            CustomDatePickerForVerifyTab.Content = new StackLayout
+            {
+                Children =
+                {
+                     DatePickerForVerifyTab
+                }
+            };
+
+            DatePickerForVerifyTab.DateSelected += CustomDatePickerVerifyTab_DateSelected;
+            
+
+            var DatePickerForPersonDeytail = new CalenderDatePicker()
+            {
+                HorizontalOptions = LayoutOptions.Fill,
+                FontSize = 16,
+                HeightRequest = 50,
+                PlaceHolderText = "DD/MM/YY",
+                Format = "dd/MM/yy",
+                FontFamily = Device.RuntimePlatform == Device.iOS ? "Montserrat-Regular" : Device.RuntimePlatform == Device.Android ? "Montserrat-Regular.ttf#Montserrat-Regular": "Assets/Montserrat-Regular.ttf#Montserrat-Regular",
+                TextColor = (Color)App.Current.Resources["Gray-900"],
+            };
+            if (item != null)
+            {
+                DatePickerForPersonDeytail.PlaceHolderText = item.DOB.ToString("dd/MM/yy");
+                DatePickerForPersonDeytail.IsEnabled = false;
+            }
+            CustomDatePickerForPersonDeytailTab.Content = new StackLayout
+            {
+
+                Children =
+                {
+                        DatePickerForPersonDeytail
+                }
+            };
+
+            DatePickerForPersonDeytail.DateSelected += CustomDatePickerPersonTab_DateSelected;
+
+            var DatePickerForTransaction = new CalenderDatePicker()
+            {
+                HorizontalOptions = LayoutOptions.Fill,
+                FontSize = 16,
+                HeightRequest = 50,
+                PlaceHolderText = "DD/MM/YY",
+                Format = "dd/MM/yy",
+                FontFamily = Device.RuntimePlatform == Device.iOS ? "Montserrat-Regular" : Device.RuntimePlatform == Device.Android ? "Montserrat-Regular.ttf#Montserrat-Regular" : "Assets/Montserrat-Regular.ttf#Montserrat-Regular",
+                TextColor = Color.Red,
+            };
+            if (item != null)
+            {
+                DatePickerForTransaction.PlaceHolderText = item.DateOfSubmission.ToString("dd/MM/yy");
+                DatePickerForTransaction.IsEnabled = false;
+            }
+            CustomDatePickerForTransaction.Content = new StackLayout
+            {
+                Children =
+                {
+                        DatePickerForTransaction
+                }
+            };
+
+            DatePickerForTransaction.DateSelected += CustomDatePickerTransactionTab_DateSelected;
         }
 
-        private void HistoryClicked(object sender, EventArgs e)
-         {
-            App.navigationPage.PushAsync(new HistoryPage());
-        }
-
-        private void ChequeDetailsButtonClicked(object sender, EventArgs e)
+        private void CustomDatePickerVerifyTab_DateSelected(object sender, DateChangedEventArgs e)
         {
-            App.navigationPage.PushAsync(new VerifyPage());
+            var date = ((DatePicker)sender).Date;
+            ((DashboardViewModel)this.BindingContext).ChequeTransaction.DateOnCheque = date;
         }
 
-        private void PersonDetailsButtonClicked(object sender, EventArgs e)
+        private void CustomDatePickerPersonTab_DateSelected(object sender, DateChangedEventArgs e)
         {
-            App.navigationPage.PushAsync(new PersonDetailsPage());
+            var date = ((DatePicker)sender).Date;
+            ((DashboardViewModel)this.BindingContext).ChequeTransaction.DOB = date;
         }
 
-        private void TransactionClicked(object sender, EventArgs e)
+        private void CustomDatePickerTransactionTab_DateSelected(object sender, DateChangedEventArgs e)
         {
-            App.navigationPage.PushAsync(new TransactionPage(ChequeTransaction));
+            var date = ((DatePicker)sender).Date;
+            ((DashboardViewModel)this.BindingContext).ChequeTransaction.DateOfSubmission = date;
+        }
+
+        internal void ClearValues()
+        {
+            CustomDatePickerForVerifyTab.Content = null;
+            CustomDatePickerForPersonDeytailTab.Content = null;
+            CustomDatePickerForTransaction.Content = null;
+
+            CreateDatePicker(null);
+
         }
     }
 }

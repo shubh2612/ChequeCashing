@@ -23,25 +23,11 @@ namespace ChequeCashing
             }
         }
 
-        //static Person PersonDatabase;
-        //public static Person Database2
-        //{
-        //    get
-        //    {
-        //        if (PersonDatabase == null)
-        //        {
-        //            PersonDatabase = new PersonDataBase(
-        //              Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ChequeCashingSQLite.db3"));
-        //        }
-        //        return PersonDatabase;
-        //    }
-        //}
-
         public static NavigationPage navigationPage { get; set; }
         public App()
         {
             InitializeComponent();
-            navigationPage = new NavigationPage(new Dashboard());
+            navigationPage = new NavigationPage(new HistoryPage());
             navigationPage.BarBackgroundColor = Color.FromHex("#f54e5e");
             MainPage = navigationPage;
         }

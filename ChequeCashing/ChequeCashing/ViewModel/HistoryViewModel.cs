@@ -1,20 +1,26 @@
-﻿using ChequeCashing.Interface;
-using ChequeCashing.Model;
-using SQLite;
+﻿using ChequeCashing.Model;
+using ChequeCashing.Views;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace ChequeCashing.ViewModel
 {
     public class HistoryViewModel : BaseViewModel
     {
-        //private SQLiteConnection conn;
-        //public HistoryViewModel regmodel;
+        public ICommand ListItemTappedCommand { get; set; }
+
+        private ChequeTransaction chequeTransaction;
+
+        public ChequeTransaction ChequeTransaction
+        {
+            get { return chequeTransaction; }
+            set { chequeTransaction = value; OnPropertyChanged(nameof(ChequeTransaction)); }
+        }
+
 
         private List<ChequeTransaction> _historyItem;
         public List<ChequeTransaction> HistoryItem
@@ -25,10 +31,16 @@ namespace ChequeCashing.ViewModel
 
         public HistoryViewModel()
         {
-            //conn = DependencyService.Get<ISqlite>().GetConnection();
-            //conn.CreateTable<ChequeTransaction>();
-            //conn.CreateTable<Person>();
             HistoryItem = new List<ChequeTransaction>();
+            ListItemTappedCommand = new Command(ListItemTapped);
+
+        }
+
+        private async void ListItemTapped(object obj)
+        {
+            var e = obj as Syncfusion.ListView.XForms.ItemTappedEventArgs;
+            var item = (ChequeTransaction)e.ItemData;
+            await App.navigationPage.PushAsync(new Dashboard(item));
         }
 
         public async override Task LoadData()
@@ -49,12 +61,6 @@ namespace ChequeCashing.ViewModel
                     HistoryItem = items;
                 }
             }
-
-           
-            //HistoryItem = new List<ChequeTransaction> {
-            //    new ChequeTransaction{ChequeNumber = "123456", Status = "Done", DateOfSubmission = DateTime.UtcNow, RemainingAmount = "0"}
-            //};
         }
-
     }
 }

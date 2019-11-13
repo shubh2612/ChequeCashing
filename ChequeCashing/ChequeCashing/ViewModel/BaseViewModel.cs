@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Acr.UserDialogs;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -41,7 +42,29 @@ namespace ChequeCashing.ViewModel
             return string.Empty;
         }
 
-        
+        public virtual string ValidatePerson()
+        {
+            return string.Empty;
+        }
+
+        public virtual string ValidateTransaction()
+        {
+            return string.Empty;
+        }
+
+        public void ShowToast(string message)
+        {
+            UserDialogs.Instance.HideLoading();
+
+            var toastConfig = new ToastConfig(message);
+            toastConfig.SetAction(new ToastAction() { Text = "Ok", TextColor = Color.Black });
+            toastConfig.SetDuration(3000);
+            toastConfig.SetPosition(ToastPosition.Top);
+            toastConfig.SetMessageTextColor(Color.Black);
+            toastConfig.SetBackgroundColor(Color.White);
+            UserDialogs.Instance.Toast(toastConfig);
+        }
+
 
         public bool IsInternetConnected()
         {
