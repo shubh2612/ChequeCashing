@@ -75,6 +75,13 @@ namespace ChequeCashing.ViewModel
             set { _readOnly = value; OnPropertyChanged(nameof(ReadOnly)); }
         }
 
+        private bool _labelVisibility;
+        public bool LabelVisibility
+        {
+            get { return _labelVisibility; }
+            set { _labelVisibility = value; OnPropertyChanged(nameof(LabelVisibility)); }
+        }
+
         private bool _readOnlyCombobox;
         public bool ReadOnlyCombobox
         {
@@ -94,6 +101,7 @@ namespace ChequeCashing.ViewModel
             if (item != null)
             {
                 ChequeTransaction = item;
+                LabelVisibility = true;
                 VerifyButton = false;
                 SubmitPerson = false;
                 SubmitTransaction = false;
@@ -102,6 +110,7 @@ namespace ChequeCashing.ViewModel
             }
             else
             {
+                LabelVisibility = false;
                 ReadOnly = false;
                 VerifyButton = true;
                 SubmitPerson = true;

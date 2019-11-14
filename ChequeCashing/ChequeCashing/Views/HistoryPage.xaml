@@ -14,9 +14,12 @@
              Title="Dasboard"
              BackgroundColor="{DynamicResource Gray-100}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="New"
-                     Clicked="AddCheque" IconImageSource="add.png">
+
+        <ToolbarItem Clicked="AddCheque" Text="Add">
+
         </ToolbarItem>
+
+
     </ContentPage.ToolbarItems>
 
     <abstractions:BaseContentPage.Resources>

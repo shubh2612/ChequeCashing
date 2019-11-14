@@ -46,9 +46,15 @@
 
                         <ScrollView>
                             <StackLayout Padding="16">
-                                <Label Style="{StaticResource HeaderLabelStyle}" Text="Verify Cheque" />
+                                <Label Style="{StaticResource HeaderLabelStyle}" 
+                                       Text="Verify Cheque"
+                                       VerticalTextAlignment="End"/>
                                 <StackLayout>
-
+                                    <Label Style="{StaticResource EntryHeaderLabelStyle}" 
+                                           Text="Cheque Number" 
+                                           Margin="0,5,0,0"
+                                           IsVisible="{Binding LabelVisibility}"
+                                           VerticalTextAlignment="End"/>
                                     <border:SfBorder BorderColor="{Binding Source={x:Reference ChequeNumber}, 
                                                                            Path=IsFocused, 
                                                                            Converter={StaticResource ColorConverter}, 
@@ -63,35 +69,43 @@
                                                                  Style="{StaticResource EntryTextStyle}" />
                                     </border:SfBorder>
 
-                                    <border:SfBorder BorderColor="{Binding Source={x:Reference ToPersonName}, 
+                                        <Label Style="{StaticResource EntryHeaderLabelStyle}" 
+                                               Text="To Person Name" 
+                                               IsVisible="{Binding LabelVisibility}"
+                                               Margin="0,5,0,0"
+                                               VerticalTextAlignment="End"/>
+
+                                        <border:SfBorder BorderColor="{Binding Source={x:Reference ToPersonName}, 
                                                                            Path=IsFocused, 
                                                                            Converter={StaticResource ColorConverter}, 
                                                                            ConverterParameter=3}" 
                                                      Style="{StaticResource FormBorderStyle}">
-                                        <control:BorderlessEntry x:Name="ToPersonName"
+                                            <control:BorderlessEntry x:Name="ToPersonName"
                                                                  Placeholder="To Person Name"
                                                                  IsReadOnly="{Binding ReadOnly}"
                                                                  Text="{Binding ChequeTransaction.ToPersonName}"
                                                                  HeightRequest="38"
                                                                  Style="{StaticResource EntryTextStyle}" />
-                                    </border:SfBorder>
+                                        </border:SfBorder>
+
+                                    <Label Style="{StaticResource EntryHeaderLabelStyle}" 
+                                           Text="Date on cheque" 
+                                           Margin="0,5,0,0"
+                                           IsVisible="{Binding LabelVisibility}"
+                                           VerticalTextAlignment="End"/>
 
                                     <border:SfBorder Padding="12,0,0,0"
                                                      Style="{StaticResource FormBorderStyle}"
                                                      x:Name="CustomDatePickerForVerifyTab">
 
-                                        <!--<control:CalenderDatePicker x:Name="CustomDatePickerForVerifyTab"
-                                                    FontFamily="{StaticResource Montserrat-Regular}"
-                                                    FontSize="16"
-                                                    Date="{Binding ChequeTransaction.DateOnCheque}"
-                                                    HeightRequest="50"
-                                                    DateSelected="CustomDatePickerVerifyTab_DateSelected"
-                                                    Format="dd/MM/yy"
-                                                    PlaceHolderText="DD/MM/YY"
-                                                    TextColor="{DynamicResource Gray-900}" />-->
-
                                     </border:SfBorder>
 
+                                    <Label Style="{StaticResource EntryHeaderLabelStyle}" 
+                                           Text="Cheque Type" 
+                                           Margin="0,5,0,0"
+                                           IsVisible="{Binding LabelVisibility}"
+                                           VerticalTextAlignment="End"/>
+                                    
                                     <border:SfBorder Padding="6,0,0,0"
                                                      BorderColor="{Binding Source={x:Reference ChequeType}, 
                                                                            Path=IsFocused, 
@@ -127,6 +141,12 @@
                                     </border:SfBorder>
                                 </StackLayout>
 
+                                <Label Style="{StaticResource EntryHeaderLabelStyle}" 
+                                       Text="Amount" 
+                                       IsVisible="{Binding LabelVisibility}"
+                                       Margin="0,5,0,0"
+                                       VerticalTextAlignment="End"/>
+                                
                                 <border:SfBorder BorderColor="{Binding Source={x:Reference Amount}, 
                                                                        Path=IsFocused, 
                                                                        Converter={StaticResource ColorConverter}, 
@@ -140,7 +160,13 @@
                                                              Keyboard="Numeric"
                                                              Style="{StaticResource EntryTextStyle}" />
                                 </border:SfBorder>
-                                
+
+                                <Label Style="{StaticResource EntryHeaderLabelStyle}" 
+                                       Text="Cheque Photo" 
+                                       Margin="0,5,0,0"
+                                       IsVisible="{Binding LabelVisibility}"
+                                       VerticalTextAlignment="End"/>
+
                                 <border:SfBorder BorderColor="#ced2d9" 
                                                  Style="{StaticResource FormBorderStyle}">
                                     <Frame WidthRequest="200"
@@ -170,7 +196,7 @@
                                                   Command="{Binding VerifyCommand}"
                                                   IsVisible="{Binding VerifyButton}"
                                                   Style="{StaticResource SfButtonStyle}"
-                                                  Text="VERIFY CHEQUE"
+                                                  Text="Next"
                                                   HeightRequest="50"/>
 
                             </StackLayout>
@@ -188,8 +214,16 @@
 
                         <ScrollView>
                             <StackLayout Padding="16">
-                                <Label Style="{StaticResource HeaderLabelStyle}" Text="Person Details" />
+                                <Label Style="{StaticResource HeaderLabelStyle}" 
+                                       Text="Person Details" />
                                 <StackLayout>
+
+                                    <Label Style="{StaticResource EntryHeaderLabelStyle}" 
+                                           Text="Name" 
+                                           IsVisible="{Binding LabelVisibility}"
+                                           Margin="0,5,0,0"
+                                           VerticalTextAlignment="End"/>
+
                                     <border:SfBorder BorderColor="{Binding Source={x:Reference Name}, 
                                                                            Path=IsFocused, 
                                                                            Converter={StaticResource ColorConverter}, 
@@ -203,6 +237,12 @@
                                                                  Style="{StaticResource EntryTextStyle}" />
                                     </border:SfBorder>
 
+                                    <Label Style="{StaticResource EntryHeaderLabelStyle}" 
+                                           Text="Address" 
+                                           Margin="0,5,0,0"
+                                           IsVisible="{Binding LabelVisibility}"
+                                           VerticalTextAlignment="End"/>
+
                                     <border:SfBorder BorderColor="{Binding Source={x:Reference Address}, 
                                                                            Path=IsFocused, 
                                                                            Converter={StaticResource ColorConverter}, 
@@ -215,6 +255,12 @@
                                                                  HeightRequest="38"
                                                                  Style="{StaticResource EntryTextStyle}" />
                                     </border:SfBorder>
+
+                                    <Label Style="{StaticResource EntryHeaderLabelStyle}" 
+                                           Text="Mobile Number" 
+                                           Margin="0,5,0,0"
+                                           IsVisible="{Binding LabelVisibility}"
+                                           VerticalTextAlignment="End"/>
 
                                     <border:SfBorder BorderColor="{Binding Source={x:Reference MobileNumber}, 
                                                                            Path=IsFocused, 
@@ -231,21 +277,22 @@
                                                                  Style="{StaticResource EntryTextStyle}" />
                                     </border:SfBorder>
 
+                                    <Label Style="{StaticResource EntryHeaderLabelStyle}" 
+                                           Text="Date of birth" 
+                                           IsVisible="{Binding LabelVisibility}"
+                                           Margin="0,5,0,0"
+                                           VerticalTextAlignment="End"/>
+
                                     <border:SfBorder Padding="12,0,0,0"
                                                      Style="{StaticResource FormBorderStyle}"
                                                      x:Name="CustomDatePickerForPersonDeytailTab">
-
-                                        <!--<control:CalenderDatePicker x:Name="CustomDatePickerForPersonDeytailTab"
-                                                                    FontFamily="{StaticResource Montserrat-Regular}"
-                                                                    FontSize="16"
-                                                                    Date="{Binding ChequeTransaction.DOB}"
-                                                                    HeightRequest="50"
-                                                                    Format="dd/MM/yy"
-                                                                    PlaceHolderText="Date of birth"
-                                                                    DateSelected="CustomDatePickerPersonTab_DateSelected"
-                                                                    TextColor="{DynamicResource Gray-900}" />-->
-
                                     </border:SfBorder>
+
+                                    <Label Style="{StaticResource EntryHeaderLabelStyle}" 
+                                           Text="ID Type" 
+                                           Margin="0,5,0,0"
+                                           IsVisible="{Binding LabelVisibility}"
+                                           VerticalTextAlignment="End"/>
 
                                     <border:SfBorder Padding="6,0,0,0"
                                                      BorderColor="{Binding Source={x:Reference IdType}, 
@@ -284,7 +331,7 @@
                                     </border:SfBorder>
                                 </StackLayout>
 
-                                <Grid Padding="10">
+                                 <Grid Padding="10">
                                     <circleImage:CircleImage Source="{Binding ChequeTransaction.PhotoImageSource, Mode=TwoWay}"
                                                              x:Name="ImagePerson"
                                                              HorizontalOptions="Center"
@@ -304,7 +351,7 @@
                                                   Style="{StaticResource SfButtonStyle}"
                                                   Command="{Binding SubmitPersonDetailCommand}"
                                                   IsVisible="{Binding SubmitPerson}"
-                                                  Text="Submit"
+                                                  Text="Next"
                                                   VerticalOptions="Center"
                                                   HeightRequest="50"/>
 
@@ -324,8 +371,16 @@
 
                         <ScrollView>
                             <StackLayout Padding="16">
-                                <Label Style="{StaticResource HeaderLabelStyle}" Text="Transaction Information" />
+                                <Label Style="{StaticResource HeaderLabelStyle}" 
+                                       Text="Transaction Information" />
                                 <StackLayout>
+
+                                    <Label Style="{StaticResource EntryHeaderLabelStyle}" 
+                                           Text="To" 
+                                           IsVisible="{Binding LabelVisibility}"
+                                           Margin="0,5,0,0"
+                                           VerticalTextAlignment="End"/>
+
                                     <border:SfBorder BorderColor="{Binding Source={x:Reference To},
                                                                            Path=IsFocused, 
                                                                            Converter={StaticResource  ColorConverter}, 
@@ -340,22 +395,23 @@
                                                                  Style="{StaticResource EntryTextStyle}"/>
                                     </border:SfBorder>
 
+                                    <Label Style="{StaticResource EntryHeaderLabelStyle}" 
+                                           Text="Transaction Date" 
+                                           Margin="0,5,0,0"
+                                           IsVisible="{Binding LabelVisibility}"
+                                           VerticalTextAlignment="End"/>
+
                                     <border:SfBorder Padding="12,0,0,0"
                                                      Style="{StaticResource FormBorderStyle}"
                                                      x:Name="CustomDatePickerForTransaction">
-
-                                        <!--<control:CalenderDatePicker x:Name="CustomDatePickerForTransaction"
-                                                                    FontFamily="{StaticResource Montserrat-Regular}"
-                                                                    FontSize="16"
-                                                                    HeightRequest="50"
-                                                                    DateSelected="CustomDatePickerTransactionTab_DateSelected"
-                                                                    Format="dd/MM/yy"
-                                                                    Date="{Binding ChequeTransaction.DateOfSubmission, Mode=TwoWay}"
-                                                                    PlaceHolderText="DD/MM/YY"
-                                                                    TextColor="{DynamicResource Gray-900}" />-->
-
                                     </border:SfBorder>
 
+                                    <Label Style="{StaticResource EntryHeaderLabelStyle}" 
+                                           Text="Transaction Amount" 
+                                           Margin="0,5,0,0"
+                                           IsVisible="{Binding LabelVisibility}"
+                                           VerticalTextAlignment="End"/>
+                                    
                                     <border:SfBorder BorderColor="{Binding Source={x:Reference TransactionAmount}, 
                                                                            Path=IsFocused, 
                                                                            Converter={StaticResource ColorConverter}, 
@@ -370,6 +426,12 @@
                                                                  Style="{StaticResource EntryTextStyle}"/>
                                     </border:SfBorder>
 
+                                    <Label Style="{StaticResource EntryHeaderLabelStyle}" 
+                                           Text="Remaining Amount" 
+                                           IsVisible="{Binding LabelVisibility}"
+                                           Margin="0,5,0,0"
+                                           VerticalTextAlignment="End"/>
+                                    
                                     <border:SfBorder BorderColor="{Binding Source={x:Reference RemainingAmount}, 
                                                                            Path=IsFocused, 
                                                                            Converter={StaticResource ColorConverter}, 
@@ -387,7 +449,7 @@
 
                                 <buttons:SfButton HorizontalOptions="Center"
                                                   Style="{StaticResource SfButtonStyle}"
-                                                  Text="SUBMIT"
+                                                  Text="Submit"
                                                   IsVisible="{Binding SubmitTransaction}"
                                                   Command="{Binding SubmitTransactionDetailCommand}"
                                                   VerticalOptions="Center"

@@ -32,6 +32,10 @@ namespace ChequeCashing.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+
+            UINavigationBar.Appearance.TintColor = UIColor.White;
+            UINavigationBar.Appearance.BarTintColor = UIColor.White;
+
             SfBorderRenderer.Init();
             SfComboBoxRenderer.Init();
             SfCalendarRenderer.Init();
